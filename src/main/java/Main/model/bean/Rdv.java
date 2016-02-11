@@ -21,6 +21,9 @@ public class Rdv
 
     private Set<Animal> animals = new HashSet<Animal>(0);
 
+    public Rdv(){
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="ID_RDV")
@@ -49,7 +52,7 @@ public class Rdv
         this.object.set(object);
     }
 
-    @Column(name = "DATE")
+    @Column(name = "DATE", columnDefinition = "DATETIME")
     public Date getDate() {
         return date.get();
     }
@@ -64,7 +67,7 @@ public class Rdv
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "PRENDRE_RDV", joinColumns = {@JoinColumn(name = "ID_RDV", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "ID_ANIMAL", nullable = true, updatable = true) })
+            inverseJoinColumns = { @JoinColumn(name = "ID_ANIMAL", nullable = false, updatable = true) })
     public Set<Animal> getAnimals() {
         return animals;
     }

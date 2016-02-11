@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by lcorbel on 05/02/16.
@@ -22,6 +23,11 @@ public class Person
     private final StringProperty email = new SimpleStringProperty(this, "email");
 
     private City city;
+
+    private Set<Animal> animals;
+
+    public Person() {
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -98,6 +104,15 @@ public class Person
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    public Set<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(Set<Animal> animals) {
+        this.animals = animals;
     }
 
     @Override

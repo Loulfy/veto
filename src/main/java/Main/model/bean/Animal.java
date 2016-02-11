@@ -26,6 +26,9 @@ public class Animal
 
     private Set<Rdv> rdvs = new HashSet<Rdv>(0);
 
+    public Animal() {
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="ID_ANIMAL")
@@ -67,7 +70,7 @@ public class Animal
         this.weight.set(weight);
     }
 
-    @Column(name = "DATE_NAISSANCE")
+    @Column(name = "DATE_NAISSANCE", columnDefinition = "DATETIME")
     public Date getBirth() {
         return birth.get();
     }
@@ -80,7 +83,7 @@ public class Animal
         this.birth.set(birth);
     }
 
-    @Column(name = "DATE_DECES")
+    @Column(name = "DATE_DECES", columnDefinition = "DATETIME")
     public Date getDeath() {
         return death.get();
     }

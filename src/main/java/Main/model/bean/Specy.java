@@ -17,6 +17,9 @@ public class Specy
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
     private final StringProperty intitule = new SimpleStringProperty(this, "intitule");
 
+    public Specy(){
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="ID_ESPECE")

@@ -1,9 +1,8 @@
 package Main;
 
 import Main.model.BddContext;
-import Main.model.bean.Animal;
-import Main.model.bean.City;
-import Main.model.bean.Rdv;
+import Main.model.bean.*;
+import javafx.scene.control.Dialog;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -17,8 +16,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        System.out.println("Hello World!");
         BddContext m = new BddContext();
+
+        Account a = m.accounts().find(2);
+
+        System.out.println(a.getLogin());
 
         m.close();
     }

@@ -20,6 +20,9 @@ public class Race
 
     private Specy specy;
 
+    public Race() {
+    }
+
     @OneToOne
     @JoinColumn(name = "ID_ESPECE")
     public Specy getSpecy() {

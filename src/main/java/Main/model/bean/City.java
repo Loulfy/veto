@@ -18,6 +18,9 @@ public class City
     private final StringProperty name = new SimpleStringProperty(this, "name");
     private final StringProperty cp = new SimpleStringProperty(this, "cp");
 
+    public City() {
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="ID_VILLE")

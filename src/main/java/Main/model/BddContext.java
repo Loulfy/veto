@@ -1,6 +1,5 @@
 package Main.model;
 
-import Main.model.bean.Rdv;
 import Main.model.dao.*;
 
 import javax.persistence.EntityManager;
@@ -19,16 +18,21 @@ public class BddContext
     private RaceDao races;
     private AnimalDao animals;
     private RdvDao rdvs;
+    private AccountDao accounts;
+    private HolidayDao holidays;
 
     public BddContext()
     {
-        em = Persistence.createEntityManagerFactory("VETO").createEntityManager();
+        em = Persistence.createEntityManagerFactory("ONLINE").createEntityManager();
         cities = new CityDao(em);
         persons = new PersonDao(em);
         species = new SpecyDao(em);
         races = new RaceDao(em);
         animals = new AnimalDao(em);
         rdvs = new RdvDao(em);
+        accounts = new AccountDao(em);
+        holidays = new HolidayDao(em);
+
     }
 
     public CityDao cities()
@@ -45,6 +49,10 @@ public class BddContext
     public AnimalDao animals() { return animals; }
 
     public RdvDao rdvs() { return rdvs; }
+
+    public AccountDao accounts() { return accounts; }
+
+    public HolidayDao holidays() { return holidays; }
 
     public void close()
     {
