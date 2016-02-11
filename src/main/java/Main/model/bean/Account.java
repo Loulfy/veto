@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by lcorbel on 11/02/16.
@@ -21,6 +23,10 @@ public class Account
     private final IntegerProperty secu = new SimpleIntegerProperty(this, "secu");
     private final ObjectProperty<Date> date_entry = new SimpleObjectProperty<Date>(this, "date_entry");
     private final ObjectProperty<Date> date_leave = new SimpleObjectProperty<Date>(this, "date_leave");
+
+    private Person person;
+
+    private Set<Holiday> holidays = new HashSet<Holiday>(0);
 
     public Account(){
     }
@@ -129,5 +135,24 @@ public class Account
 
     public void setDate_leave(Date date_leave) {
         this.date_leave.set(date_leave);
+    }
+
+    @OneToOne
+    @JoinColumn(name = "ID_PERSONNE", nullable = false)
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    public Set<Holiday> getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(Set<Holiday> holidays) {
+        this.holidays = holidays;
     }
 }

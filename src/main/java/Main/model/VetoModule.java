@@ -22,5 +22,6 @@ public class VetoModule extends AbstractModule
         bind(Dao.class).annotatedWith(Names.named("Rdv")).to(RdvDao.class);
         bind(Dao.class).annotatedWith(Names.named("Account")).to(AccountDao.class);
         bind(Dao.class).annotatedWith(Names.named("Holiday")).to(HolidayDao.class);
+        bind(Dao.class).annotatedWith(Names.named("Info")).to(InfoDao.class);
     }
 }

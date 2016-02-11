@@ -41,6 +41,9 @@ public class VetoContext
     @Inject
     @Named("Holiday")
     private Dao holidays;
+    @Inject
+    @Named("Info")
+    private Dao infos;
 
     public void begin()
     {
@@ -67,4 +70,6 @@ public class VetoContext
     public Dao accounts() { return accounts; }
 
     public Dao holidays() { return holidays; }
+
+    public Dao infos() { return infos; }
 }
