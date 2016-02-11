@@ -1,12 +1,18 @@
 package Main;
 
-import Main.model.BddContext;
+import Main.model.BDD;
+import Main.model.VetoContext;
+import Main.model.VetoModule;
 import Main.model.bean.*;
-import javafx.scene.control.Dialog;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import Main.model.dao.CityDao;
+import Main.model.dao.Dao;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.persist.PersistService;
+import com.google.inject.persist.jpa.JpaPersistModule;
+
+import java.util.List;
 
 /**
  * Hello world!
@@ -17,12 +23,16 @@ public class App
     public static void main( String[] args )
     {
         System.out.println("Hello World!");
-        BddContext m = new BddContext();
+        VetoContext m = BDD.createContext(BDD.State.LOCAL);
 
-        Account a = m.accounts().find(2);
+        m.begin();
 
-        System.out.println(a.getLogin());
+        Dao t = m.cities();
+        List<City> cities = t.findAll();
 
-        m.close();
+        for(City c : cities)
+            System.out.println(c);
+
+        m.end();
     }
 }

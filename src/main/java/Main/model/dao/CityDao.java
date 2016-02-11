@@ -1,28 +1,35 @@
 package Main.model.dao;
 
 import Main.model.bean.City;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by lcorbel on 04/02/16.
  */
+
+@Singleton
 public class CityDao implements Dao<City>
 {
-    private EntityManager em;
+    @Inject
+    private Provider<EntityManager> em;
 
-    public CityDao(EntityManager em) {
-        this.em = em;
+    @Transactional
+    public Object find(int id) {
+        return em.get().find(City.class, id);
     }
 
-    public City find(int id) {
-        return em.find(City.class, id);
+    @Transactional
+    public void saveAllChanges(Object o) {
+        em.get().persist(o);
     }
 
-    public City saveAllChanges(City o) {
-        em.getTransaction().begin();
-        em.persist(o);
-        em.getTransaction().commit();
-        return o;
+    public List<Object> findAll() {
+        return em.get().createQuery("from "+City.class.getName()).getResultList();
     }
 }

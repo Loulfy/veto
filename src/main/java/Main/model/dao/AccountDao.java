@@ -1,28 +1,35 @@
 package Main.model.dao;
 
 import Main.model.bean.Account;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by lcorbel on 11/02/16.
  */
+
+@Singleton
 public class AccountDao implements Dao<Account>
 {
-    private EntityManager em;
+    @Inject
+    private Provider<EntityManager> em;
 
-    public AccountDao(EntityManager em) {
-        this.em = em;
+    @Transactional
+    public Object find(int id) {
+        return em.get().find(Account.class, id);
     }
 
-    public Account find(int id) {
-        return em.find(Account.class, id);
+    @Transactional
+    public void saveAllChanges(Object o) {
+        em.get().persist(o);
     }
 
-    public Account saveAllChanges(Account o) {
-        em.getTransaction().begin();
-        em.persist(o);
-        em.getTransaction().commit();
-        return o;
+    public List<Object> findAll() {
+        return em.get().createQuery("from "+Account.class.getName()).getResultList();
     }
 }

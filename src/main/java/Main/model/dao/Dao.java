@@ -1,11 +1,15 @@
 package Main.model.dao;
 
+import java.util.List;
+
 /**
  * Created by lcorbel on 04/02/16.
  */
 public interface Dao<T>
 {
-    public T find(int id);
+    public Object find(int id);
 
-    public T saveAllChanges(T o);
+    public void saveAllChanges(Object o);
+
+    public List<Object> findAll();
 }
